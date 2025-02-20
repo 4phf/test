@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EUR/USD 实时图表与交易建议</title>
+  <!-- 引入 Bootstrap 用于响应式布局 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body { margin: 0; padding: 0; }
+    .container { margin-top: 20px; }
+    .chart-container { width: 100%; height: 500px; }
+    @media (max-width: 768px) {
+      .chart-container { height: 300px; }
+    }
+    .signal-box { margin-top: 20px; }
+    .signal-item { padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">EUR/USD 实时图表与交易建议</h1>
+    <div class="row">
+      <!-- 图表区域 -->
+      <div class="col-md-8">
+        <div class="chart-container">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div id="tradingview_eurusd"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+              new TradingView.widget({
+                "width": "100%",
+                "height": "100%",
+                "symbol": "OANDA:EURUSD",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "light",
+                "style": "1",
+                "locale": "zh",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "allow_symbol_change": true,
+                "container_id": "tradingview_eurusd"
+              });
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+        </div>
+      </div>
+      <!-- 交易建议与信心指数等信息区域 -->
+      <div class="col-md-4">
+        <div class="signal-box">
+          <div class="signal-item">
+            <h4>交易建议</h4>
+            <p id="trade-signal">建议：持有/买入/卖出</p>
+          </div>
+          <div class="signal-item">
+            <h4>信心指数</h4>
+            <p id="confidence-index">80%</p>
+          </div>
+          <div class="signal-item">
+            <h4>止盈 / 止损</h4>
+            <p id="stop-loss">止损：1.1000</p>
+            <p id="take-profit">止盈：1.1500</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 这里可以添加 JavaScript 实现数据动态更新 -->
+  <script>
+    // 示例函数，用于动态更新交易信号（请替换为实际的 API 数据或算法逻辑）
+    function updateSignals() {
+      // 例如：通过 Ajax 或 WebSocket 获取实时数据后更新页面内容
+      document.getElementById('trade-signal').innerText = "建议：买入";
+      document.getElementById('confidence-index').innerText = "75%";
+      document.getElementById('stop-loss').innerText = "止损：1.0950";
+      document.getElementById('take-profit').innerText = "止盈：1.1550";
+    }
+    // 每分钟更新一次
+    setInterval(updateSignals, 60000);
+    // 初始化调用
+    updateSignals();
+  </script>
+</body>
+</html>
